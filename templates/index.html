@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Fetcher</title>
+</head>
+<body>
+    <h1>URL Fetcher</h1>
+    <form id="fetch-form">
+        <label for="target_file">Target file:</label>
+        <input type="text" id="target_file" name="target_file" required>
+        <button type="submit">Fetch</button>
+    </form>
+    <h2>Results</h2>
+    <pre id="results"></pre>
+    <script>
+        document.getElementById('fetch-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const targetFile = document.getElementById('target_file').value;
+            const response = await fetch('/fetch_url', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `target_file=${encodeURIComponent(targetFile)}`
+            });
+            const results = await response.json();
+            document.getElementById('results').textContent = JSON.stringify(results, null, 2);
+        });
+    </script>
+</body>
+</html>
