@@ -1,0 +1,3 @@
+docker run -p 5000:5000 -e USERNAME=your_username -e PASSWORD=your_password my-webapp; 
+
+cd /root; docker stop submission_review; docker rm submission_review; tag=`date +%m_%d_%y`; rm -rf /root/submission_review/; git clone https://github.com/kthevar/submission_review.git; cd submission_review/; docker build -t submission_review:$tag .; docker run -p 5000:5002 submission_review:$tag
